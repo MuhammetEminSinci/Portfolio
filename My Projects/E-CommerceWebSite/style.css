@@ -1,0 +1,392 @@
+/* Reset & temel */
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #121212;
+  color: #eee;
+  line-height: 1.5;
+  transition: background-color 0.3s, color 0.3s;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Açık tema */
+body.light {
+  background-color: #f9f9f9;
+  color: #222;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1e1e1e;
+  border-bottom: 1px solid #333;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background-color 0.3s, color 0.3s;
+}
+body.light .header {
+  background-color: #fff;
+  border-bottom-color: #ccc;
+}
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.nav select,
+.nav input[type="search"] {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  background-color: #222;
+  color: #eee;
+  transition: background-color 0.3s, color 0.3s;
+}
+body.light .nav select,
+body.light .nav input[type="search"] {
+  background-color: #eee;
+  color: #222;
+  border: 1px solid #ccc;
+}
+.nav input[type="search"] {
+  width: 220px;
+}
+
+/* Buttons */
+.actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.actions button {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: #eee;
+  transition: color 0.3s;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+}
+.actions button:hover,
+.actions button:focus {
+  color: #1e90ff;
+  outline: none;
+}
+body.light .actions button {
+  color: #222;
+}
+
+/* Sepet sayacı */
+.cart-count {
+  background-color: #e94e77;
+  border-radius: 50%;
+  padding: 2px 7px;
+  font-size: 0.8rem;
+  color: #fff;
+  margin-left: 0.3rem;
+  vertical-align: super;
+}
+
+/* Ürün listesi */
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+/* Ürün kartları */
+.product-card {
+  background-color: #222;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.3);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 6px solid transparent;
+}
+body.light .product-card {
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+}
+.product-card:hover,
+.product-card:focus-within {
+  transform: translateY(-8px);
+  box-shadow: 0 14px 30px rgb(0 0 0 / 0.5);
+  outline: none;
+}
+
+/* Kategori renklendirmesi */
+.product-card[data-category="Elektronik"] {
+  border-left-color: #007bff;
+}
+.product-card[data-category="Bilgisayar"] {
+  border-left-color: #28a745;
+}
+.product-card[data-category="Aksesuar"] {
+  border-left-color: #ffc107;
+}
+
+/* Resim */
+.product-card img {
+  width: 100%;
+  height: 180px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Başlık ve fiyat */
+.product-card h3 {
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.product-card .price {
+  color: #e94e77;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* Sepete ekle butonu */
+.product-card button {
+  background-color: #e94e77;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.65rem 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start;
+}
+.product-card button:hover,
+.product-card button:focus {
+  background-color: #d1375c;
+  outline: none;
+}
+
+/* Modal Temelleri */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.modal:not(.hidden) {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-content {
+  background-color: #222;
+  color: #eee;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 480px;
+  position: relative;
+  box-shadow: 0 8px 30px rgb(0 0 0 / 0.6);
+  overflow-y: auto;
+  max-height: 90vh;
+  outline: none;
+}
+body.light .modal-content {
+  background-color: #fff;
+  color: #222;
+}
+
+/* Modal Kapat Butonu */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.modal-close:hover,
+.modal-close:focus {
+  color: #e94e77;
+  outline: none;
+}
+
+/* Modal içindeki img */
+.modal-content img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  user-select: none;
+}
+
+/* Sepet Modal özel */
+.cart-modal-content {
+  display: flex;
+  flex-direction: column;
+}
+.cart-items {
+  list-style: none;
+  margin: 1rem 0;
+  padding-left: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #444;
+  border-radius: 6px;
+}
+.cart-items li {
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #444;
+}
+.cart-items li:last-child {
+  border-bottom: none;
+}
+.cart-items li > div {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.cart-items button {
+  background: none;
+  border: none;
+  color: #e94e77;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.cart-items button:hover,
+.cart-items button:focus {
+  color: #d1375c;
+  outline: none;
+}
+
+/* Sepet toplam ve butonlar */
+.cart-total {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: right;
+}
+.btn {
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 1rem;
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+.btn-primary {
+  background-color: #1e90ff;
+  color: #fff;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #1473cc;
+  outline: none;
+}
+.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+.btn-danger:hover,
+.btn-danger:focus {
+  background-color: #b52a37;
+  outline: none;
+}
+
+/* Checkout Modal Form */
+.checkout-modal-content form label {
+  display: block;
+  margin: 1rem 0 0.25rem;
+  font-weight: 600;
+}
+.checkout-modal-content form input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background-color: #222;
+  color: #eee;
+  font-size: 1rem;
+  outline: none;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+.checkout-modal-content form input:focus {
+  border-color: #1e90ff;
+}
+body.light .checkout-modal-content form input {
+  background-color: #fff;
+  color: #222;
+  border-color: #ccc;
+}
+.payment-message {
+  margin-top: 1rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #28a745;
+  display: none;
+}
+.payment-message.visible {
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .nav input[type="search"] {
+    width: 100%;
+  }
+  .product-list {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .header {
+    flex-wrap: wrap;
+  }
+}

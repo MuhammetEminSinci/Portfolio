@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SinciShop - Modern E-Ticaret</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <h1 class="logo">SinciShop</h1>
+    <nav class="nav" role="navigation" aria-label="Ana Menü">
+      <select id="category-filter" aria-label="Kategori Filtrele">
+        <option value="all">Tüm Kategoriler</option>
+        <option value="Elektronik">Elektronik</option>
+        <option value="Bilgisayar">Bilgisayar</option>
+        <option value="Aksesuar">Aksesuar</option>
+      </select>
+
+      <input
+        type="search"
+        id="search-input"
+        placeholder="Ürün ara..."
+        aria-label="Ürün arama kutusu"
+        autocomplete="off"
+      />
+    </nav>
+
+    <div class="actions">
+      <button id="dark-mode-toggle" aria-pressed="false" aria-label="Tema değiştir">🌙</button>
+
+      <button id="cart-btn" aria-label="Sepet, tıklayınca açılır" aria-haspopup="dialog" aria-expanded="false">
+        🛒 <span id="cart-count" aria-live="polite" class="cart-count">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section id="product-list" class="product-list" aria-live="polite" aria-label="Ürün Listesi"></section>
+  </main>
+
+  <!-- Ürün Detay Modal -->
+  <div
+    id="product-modal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="product-modal-title"
+    tabindex="-1"
+  >
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Ürün detayını kapat">&times;</button>
+      <img id="modal-image" src="" alt="" />
+      <h2 id="product-modal-title"></h2>
+      <p id="modal-description"></p>
+      <p id="modal-price"></p>
+      <button id="add-to-cart-btn">Sepete Ekle</button>
+    </div>
+  </div>
+
+  <!-- Sepet Modal -->
+  <div
+    id="cart-modal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="cart-modal-title"
+    tabindex="-1"
+  >
+    <div class="modal-content cart-modal-content">
+      <button class="modal-close" aria-label="Sepet modalını kapat">&times;</button>
+      <h2 id="cart-modal-title">Sepetiniz</h2>
+      <ul id="cart-items" class="cart-items" aria-live="polite" aria-relevant="additions removals"></ul>
+      <div class="cart-total">
+        Toplam: <span id="total-price">₺0</span>
+      </div>
+      <button id="clear-cart-btn" class="btn btn-danger">Sepeti Temizle</button>
+      <button id="checkout-btn" class="btn btn-primary">Ödeme Yap</button>
+    </div>
+  </div>
+
+  <!-- Ödeme Modal (Basit Örnek) -->
+  <div
+    id="checkout-modal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="checkout-modal-title"
+    tabindex="-1"
+  >
+    <div class="modal-content checkout-modal-content">
+      <button class="modal-close" aria-label="Ödeme modalını kapat">&times;</button>
+      <h2 id="checkout-modal-title">Ödeme Ekranı</h2>
+      <form id="checkout-form" novalidate>
+        <label for="name">İsim:</label>
+        <input type="text" id="name" name="name" required autocomplete="name" />
+
+        <label for="card-number">Kredi Kartı Numarası:</label>
+        <input
+          type="text"
+          id="card-number"
+          name="card-number"
+          maxlength="16"
+          minlength="16"
+          pattern="\d{16}"
+          required
+          autocomplete="cc-number"
+          inputmode="numeric"
+        />
+
+        <label for="expiry">Son Kullanma Tarihi:</label>
+        <input type="month" id="expiry" name="expiry" required autocomplete="cc-exp" />
+
+        <label for="cvv">CVV:</label>
+        <input
+          type="text"
+          id="cvv"
+          name="cvv"
+          maxlength="3"
+          minlength="3"
+          pattern="\d{3}"
+          required
+          autocomplete="cc-csc"
+          inputmode="numeric"
+        />
+
+        <button type="submit" class="btn btn-primary">Ödemeyi Tamamla</button>
+      </form>
+      <p id="payment-message" class="payment-message" role="alert" aria-live="assertive"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
